@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posty Blog</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 20px;
+    }
+    
+    .header-text {
+      flex: 1;
+    }
+    
+    .header-text p {
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    .btn-new {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .btn-new:hover {
+      transform: translateY(-2px);
+    }
+    
+    .posts-list {
+      list-style: none;
+    }
+    
+    .post-item {
+      padding: 20px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      transition: all 0.3s;
+    }
+    
+    .post-item:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .post-item a {
+      text-decoration: none;
+      color: #667eea;
+      font-size: 1.3em;
+      font-weight: 600;
+    }
+    
+    .post-item a:hover {
+      color: #764ba2;
+    }
+    
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+    }
+    
+    .empty p {
+      margin-bottom: 20px;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-text">
+        <h1>📝 Posty</h1>
+        <p>Your simple markdown blog</p>
+      </div>
+      <a href="/new" class="btn-new">+ New Post</a>
+    </div>
+    
+    <% if (posts.length > 0) { %>
+      <ul class="posts-list">
+        <% posts.forEach(post => { %>
+          <li class="post-item">
+            <a href="/post/<%= post.slug %>"><%= post.title %></a>
+          </li>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <div class="empty">
+        <p>No posts yet. <a href="/new" style="color: #667eea;">Create one!</a></p>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

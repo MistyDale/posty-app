@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Post - Posty Blog</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .back-link:hover {
+      color: #764ba2;
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+    }
+    
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 1em;
+      resize: vertical;
+      transition: border-color 0.3s;
+    }
+    
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    textarea {
+      min-height: 300px;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    
+    button,
+    .btn-cancel {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      flex: 1;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-cancel {
+      background: #f0f0f0;
+      color: #333;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .btn-cancel:hover {
+      background: #e0e0e0;
+    }
+    
+    .help-text {
+      font-size: 0.9em;
+      color: #999;
+      margin-top: 5px;
+    }
+    
+    .error {
+      background: #fee;
+      color: #c33;
+      padding: 12px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border-left: 4px solid #c33;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">← Back</a>
+    
+    <h1>✍️ Create New Post</h1>
+    <p class="subtitle">Write your post in Markdown format</p>
+    
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+    
+    <form method="POST">
+      <div class="form-group">
+        <label for="title">Post Title</label>
+        <input 
+          type="text" 
+          id="title" 
+          name="title" 
+          required 
+          placeholder="My Awesome Post"
+          value="<%= typeof locals.title !== 'undefined' ? title : '' %>"
+        >
+        <p class="help-text">Give your post a catchy title</p>
+      </div>
+      
+      <div class="form-group">
+        <label for="content">Content (Markdown)</label>
+        <textarea 
+          id="content" 
+          name="content" 
+          required 
+          placeholder="Write your post here...&#10;&#10;You can use **bold**, *italic*, [links](url), and more!&#10;&#10;## Headings work too&#10;&#10;- Lists&#10;- Are&#10;- Supported"
+        ><%= typeof locals.content !== 'undefined' ? content : '' %></textarea>
+        <p class="help-text">Supports standard Markdown syntax</p>
+      </div>
+      
+      <div class="form-actions">
+        <a href="/" class="btn-cancel">Cancel</a>
+        <button type="submit">Publish Post</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
